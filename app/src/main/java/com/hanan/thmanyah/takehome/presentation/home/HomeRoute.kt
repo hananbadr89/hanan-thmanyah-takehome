@@ -1,0 +1,18 @@
+package com.hanan.thmanyah.takehome.presentation.home
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+
+@Composable
+fun HomeRoute(
+    onPodcastClick: (String) -> Unit = {},
+    viewModel: HomeViewModel = hiltViewModel(),
+) {
+    val state by viewModel.state.collectAsState()
+
+    HomeScreen(
+        state = state
+    )
+}
