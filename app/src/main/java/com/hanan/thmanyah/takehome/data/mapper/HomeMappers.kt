@@ -8,6 +8,7 @@ import com.hanan.thmanyah.takehome.domain.model.HomeItem
 import com.hanan.thmanyah.takehome.domain.model.HomeSection
 import com.hanan.thmanyah.takehome.domain.model.HomeSectionsPage
 import com.hanan.thmanyah.takehome.domain.model.PodcastItem
+import com.hanan.thmanyah.takehome.domain.model.SectionLayout
 
 fun HomeSectionsResponseDto.toDomain(): HomeSectionsPage {
     return HomeSectionsPage(
@@ -26,7 +27,7 @@ private fun HomeSectionDto.toDomainOrNull(): HomeSection? {
 
     return HomeSection(
         name = name.requiredNonBlank() ?: return null,
-        type = type.requiredNonBlank() ?: return null,
+        type = type.requiredNonBlank()?.toSectionLayout() ?: return null,
         contentType = contentType,
         order = order ?: Int.MAX_VALUE,
         items = items
@@ -40,7 +41,9 @@ private fun HomeContentDto.toDomainItemOrNull(contentType: ContentType): HomeIte
                 id = podcastId?.requiredNonBlank() ?: return null,
                 name = name.requiredNonBlank() ?: return null,
                 description = description,
-                avatarUrl = avatarUrl
+                avatarUrl = avatarUrl,
+                episodeCount = episodeCount,
+                duration = duration
             )
         }
 
@@ -53,6 +56,14 @@ private fun String.toContentType(): ContentType =
         when (it) {
             "podcast" -> ContentType.PODCAST
             else -> ContentType.UNKNOWN
+        }
+    }
+
+fun String.toSectionLayout(): SectionLayout =
+    trim().lowercase().let {
+        when (lowercase()) {
+            "square" -> SectionLayout.SQUARE
+            else -> SectionLayout.UNKNOWN
         }
     }
 
