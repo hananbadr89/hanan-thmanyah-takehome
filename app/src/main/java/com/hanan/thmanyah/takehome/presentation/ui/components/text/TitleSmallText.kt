@@ -10,29 +10,29 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.hanan.thmanyah.takehome.presentation.ui.theme.ThmanyahTheme
 
 @Composable
-fun LabelSmallText(
+fun TitleSmallText(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
-    maxLines: Int = Int.MAX_VALUE,
-    overflow: TextOverflow = TextOverflow.Clip
+    maxLines: Int = 1
 ) {
     Text(
         text = text,
-        style = MaterialTheme.typography.labelSmall,
+        style = MaterialTheme.typography.titleSmall,
         modifier = modifier,
-        color = color,
         maxLines = maxLines,
-        overflow = overflow
+        overflow = TextOverflow.Ellipsis,
+        color = color,
+        softWrap = false
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun LabelSmallTextPreview() {
+private fun TitleSmallTextPreview() {
     ThmanyahTheme {
-        LabelSmallText(
-            text = "NEW"
+        TitleSmallText(
+            text = "The Big Listen: A Podcast About Podcasts and Stories Worth Hearing"
         )
     }
 }
