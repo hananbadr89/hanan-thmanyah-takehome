@@ -11,9 +11,9 @@ data class HomeSectionsResponseDto(
 
 @JsonClass(generateAdapter = true)
 data class PaginationDto(
-    @field:Json(name = "next_page")
+    @property:Json(name = "next_page")
     val nextPage: String?,
-    @field:Json(name = "total_pages")
+    @property:Json(name = "total_pages")
     val totalPages: Int?
 )
 
@@ -21,7 +21,7 @@ data class PaginationDto(
 data class SectionDto(
     val name: String?,
     val type: String?,
-    @field:Json(name = "content_type")
+    @property:Json(name = "content_type")
     val contentType: String?,
     val order: Int?,
     val content: List<Map<String, Any?>>
