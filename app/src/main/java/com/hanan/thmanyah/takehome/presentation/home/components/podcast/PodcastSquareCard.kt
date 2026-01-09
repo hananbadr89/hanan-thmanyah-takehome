@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,7 +24,10 @@ fun PodcastSquareCard(
             .width(140.dp)
     ) {
         PodcastCover(
-            url = item.imageUrl
+            url = item.imageUrl,
+            modifier = Modifier
+                .width(140.dp)
+                .height(100.dp)
         )
 
         Spacer(Modifier.height(6.dp))
@@ -36,7 +40,8 @@ fun PodcastSquareCard(
 
         PodcastMetaRow(
             episodes = item.episodes,
-            duration = item.duration
+            duration = item.duration,
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
         )
     }
 }
