@@ -52,9 +52,7 @@ private fun PodcastSquareCardPreview() {
                 description = "There are tens of thousands of podcasts out there. This show helps you discover what to listen to.",
                 imageUrl = "https://media.npr.org/assets/img/2018/08/03/npr_tbl_podcasttile_sq-284e5618e2b2df0f3158b076d5bc44751e78e1b6.jpg",
                 episodes = "90 eps",
-                duration = "2h 5m",
-                language = "en",
-                isTrending = true
+                duration = "2h 5m"
             ),
             modifier = Modifier.padding(16.dp)
         )
