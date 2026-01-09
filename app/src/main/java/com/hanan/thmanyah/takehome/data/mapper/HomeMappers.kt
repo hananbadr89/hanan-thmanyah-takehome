@@ -63,6 +63,7 @@ fun String.toSectionLayout(): SectionLayout =
     trim().lowercase().let {
         when (lowercase()) {
             "square" -> SectionLayout.SQUARE
+            "queue" -> SectionLayout.QUEUE
             else -> SectionLayout.UNKNOWN
         }
     }

@@ -7,6 +7,7 @@ enum class ContentType {
 
 enum class SectionLayout {
     SQUARE,
+    QUEUE,
     UNKNOWN
 }
 
