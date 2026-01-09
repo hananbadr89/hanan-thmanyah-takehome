@@ -1,0 +1,59 @@
+package com.hanan.thmanyah.takehome.data.mapper
+
+import com.hanan.thmanyah.takehome.data.remote.dto.HomeContentDto
+import com.hanan.thmanyah.takehome.data.remote.dto.HomeSectionDto
+import com.hanan.thmanyah.takehome.data.remote.dto.HomeSectionsResponseDto
+import com.hanan.thmanyah.takehome.domain.model.ContentType
+import com.hanan.thmanyah.takehome.domain.model.HomeItem
+import com.hanan.thmanyah.takehome.domain.model.HomeSection
+import com.hanan.thmanyah.takehome.domain.model.HomeSectionsPage
+import com.hanan.thmanyah.takehome.domain.model.PodcastItem
+
+fun HomeSectionsResponseDto.toDomain(): HomeSectionsPage {
+    return HomeSectionsPage(
+        sections = sections
+            .orEmpty()
+            .mapNotNull { it.toDomainOrNull() }
+            .sortedBy { it.order }
+    )
+}
+
+private fun HomeSectionDto.toDomainOrNull(): HomeSection? {
+    val contentType = contentType.requiredNonBlank()?.toContentType() ?: return null
+
+    val items = content.orEmpty().mapNotNull { it.toDomainItemOrNull(contentType) }
+    if (items.isEmpty()) return null
+
+    return HomeSection(
+        name = name.requiredNonBlank() ?: return null,
+        type = type.requiredNonBlank() ?: return null,
+        contentType = contentType,
+        order = order ?: Int.MAX_VALUE,
+        items = items
+    )
+}
+
+private fun HomeContentDto.toDomainItemOrNull(contentType: ContentType): HomeItem? {
+    return when (contentType) {
+        ContentType.PODCAST -> {
+            PodcastItem(
+                id = podcastId?.requiredNonBlank() ?: return null,
+                name = name.requiredNonBlank() ?: return null,
+                description = description,
+                avatarUrl = avatarUrl
+            )
+        }
+
+        ContentType.UNKNOWN -> null
+    }
+}
+
+private fun String.toContentType(): ContentType =
+    trim().lowercase().let {
+        when (it) {
+            "podcast" -> ContentType.PODCAST
+            else -> ContentType.UNKNOWN
+        }
+    }
+
+private fun String?.requiredNonBlank(): String? = this?.takeIf { it.isNotBlank() }
