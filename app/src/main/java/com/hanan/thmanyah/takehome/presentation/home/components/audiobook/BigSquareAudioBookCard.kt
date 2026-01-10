@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -46,7 +47,12 @@ fun BigSquareAudioBookCard(
                 shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
             )
 
-            Column(modifier = Modifier.padding(6.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 10.dp)
+                    .heightIn(min = 44.dp)
+            ) {
                 TitleMediumText(
                     text = item.title,
                     maxLines = 1,
@@ -73,8 +79,6 @@ fun BigSquareAudioBookCard(
                             .padding(horizontal = 12.dp)
                     )
                 }
-
-                Spacer(Modifier.height(4.dp))
             }
         }
     }

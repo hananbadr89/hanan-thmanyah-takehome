@@ -6,17 +6,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hanan.thmanyah.takehome.domain.model.SectionLayout
-import com.hanan.thmanyah.takehome.presentation.home.components.podcast.PodcastSquareRow
 import com.hanan.thmanyah.takehome.presentation.home.components.sections.SectionRenderer
 import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionUi
 
 @Composable
 fun HomeSection(
-    section: HomeSectionUi
+    section: HomeSectionUi,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         SectionRenderer(

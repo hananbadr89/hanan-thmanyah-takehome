@@ -1,6 +1,7 @@
 package com.hanan.thmanyah.takehome.presentation.home.components.sections
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,15 +10,17 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.hanan.thmanyah.takehome.presentation.home.components.audiobook.BigSquareAudioBookCard
-import com.hanan.thmanyah.takehome.presentation.home.model.AudioBookUi
 
 @Composable
-fun BigSquareAudioBookRow(
+fun <T> BigSquareSection(
     title: String,
-    items: List<AudioBookUi>,
-    modifier: Modifier = Modifier
+    items: List<T>,
+    modifier: Modifier = Modifier,
+    itemWidth: Dp = 220.dp,
+    key: ((index: Int, item: T) -> Any)? = null,
+    itemContent: @Composable (item: T) -> Unit,
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -30,13 +33,12 @@ fun BigSquareAudioBookRow(
             horizontalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             itemsIndexed(
-                items,
-                key = { index, item -> "${item.id}-$index" }
+                items = items,
+                key = if (key != null) ({ index, item -> key(index, item) }) else null
             ) { _, item ->
-                BigSquareAudioBookCard(
-                    item = item,
-                    modifier = Modifier.width(220.dp)
-                )
+                Box(Modifier.width(itemWidth)) {
+                    itemContent(item)
+                }
             }
         }
     }
