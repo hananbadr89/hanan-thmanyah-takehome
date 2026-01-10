@@ -3,6 +3,7 @@ package com.hanan.thmanyah.takehome.data.mapper
 import com.hanan.thmanyah.takehome.data.remote.dto.HomeContentDto
 import com.hanan.thmanyah.takehome.data.remote.dto.HomeSectionDto
 import com.hanan.thmanyah.takehome.data.remote.dto.HomeSectionsResponseDto
+import com.hanan.thmanyah.takehome.domain.model.AudioArticleItem
 import com.hanan.thmanyah.takehome.domain.model.AudioBookItem
 import com.hanan.thmanyah.takehome.domain.model.ContentType
 import com.hanan.thmanyah.takehome.domain.model.EpisodeItem
@@ -67,6 +68,16 @@ private fun HomeContentDto.toDomainItemOrNull(contentType: ContentType): HomeIte
             releaseDateIso = releaseDate
         )
 
+        ContentType.AUDIO_ARTICLE -> AudioArticleItem(
+            id = articleId?.takeIf { it.isNotBlank() } ?: return null,
+            title = name?.takeIf { it.isNotBlank() } ?: return null,
+            authorName = authorName?.takeIf { it.isNotBlank() },
+            description = description,
+            imageUrl = avatarUrl,
+            durationSec = duration,
+            releaseDateIso = releaseDate
+        )
+
         ContentType.UNKNOWN -> null
     }
 }
@@ -77,6 +88,7 @@ private fun String.toContentType(): ContentType =
             "podcast" -> ContentType.PODCAST
             "episode" -> ContentType.EPISODE
             "audio_book" -> ContentType.AUDIO_BOOK
+            "audio_article" -> ContentType.AUDIO_ARTICLE
             else -> ContentType.UNKNOWN
         }
     }

@@ -2,11 +2,13 @@ package com.hanan.thmanyah.takehome.presentation.home.mapper
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.hanan.thmanyah.takehome.domain.model.AudioArticleItem
 import com.hanan.thmanyah.takehome.domain.model.AudioBookItem
 import com.hanan.thmanyah.takehome.domain.model.ContentType
 import com.hanan.thmanyah.takehome.domain.model.EpisodeItem
 import com.hanan.thmanyah.takehome.domain.model.HomeSection
 import com.hanan.thmanyah.takehome.domain.model.PodcastItem
+import com.hanan.thmanyah.takehome.presentation.home.model.AudioArticleUi
 import com.hanan.thmanyah.takehome.presentation.home.model.AudioBookUi
 import com.hanan.thmanyah.takehome.presentation.home.model.EpisodeUi
 import com.hanan.thmanyah.takehome.presentation.home.model.HomeItemUi
@@ -35,6 +37,11 @@ private fun HomeSection.toUiOrNull(): HomeSectionUi? {
             .filterIsInstance<AudioBookItem>()
             .map { it.toUi() }
 
+        ContentType.AUDIO_ARTICLE ->
+            items
+                .filterIsInstance<AudioArticleItem>()
+                .map { it.toUi() }
+
         ContentType.UNKNOWN -> emptyList()
     }
 
@@ -43,7 +50,8 @@ private fun HomeSection.toUiOrNull(): HomeSectionUi? {
     return HomeSectionUi(
         title = name,
         layout = type,
-        items = uiItems
+        items = uiItems,
+        contentType = contentType
     )
 }
 
@@ -75,3 +83,14 @@ fun AudioBookItem.toUi(): AudioBookUi = AudioBookUi(
     release = releaseDateIso?.toYearOrEmpty(),
     authorName = authorName
 )
+
+private fun AudioArticleItem.toUi(): AudioArticleUi =
+    AudioArticleUi(
+        id = id,
+        title = title,
+        authorName = authorName,
+        description = description,
+        imageUrl = imageUrl,
+        duration = durationSec.formatAsDurationSeconds(),
+        year = releaseDateIso?.toYearOrEmpty()
+    )

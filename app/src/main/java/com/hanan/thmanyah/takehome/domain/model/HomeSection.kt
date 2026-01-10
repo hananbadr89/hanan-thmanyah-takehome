@@ -4,6 +4,7 @@ enum class ContentType {
     PODCAST,
     EPISODE,
     AUDIO_BOOK,
+    AUDIO_ARTICLE,
     UNKNOWN
 }
 
@@ -52,6 +53,16 @@ data class AudioBookItem(
     val title: String,
     val imageUrl: String?,
     val authorName: String?,
+    val durationSec: Int?,
+    val releaseDateIso: String?
+) : HomeItem
+
+data class AudioArticleItem(
+    val id: String,
+    val title: String,
+    val authorName: String?,
+    val description: String?,
+    val imageUrl: String?,
     val durationSec: Int?,
     val releaseDateIso: String?
 ) : HomeItem

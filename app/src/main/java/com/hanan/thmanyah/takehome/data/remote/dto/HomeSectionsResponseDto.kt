@@ -36,4 +36,5 @@ data class HomeContentDto(
     @property:Json(name = "podcastPopularityScore") val podcastPopularityScore: Int? = null,
     @property:Json(name = "author_name") val authorName: String? = null,
     @property:Json(name = "audiobook_id") val audioBookId: String? = null,
+    @property:Json(name = "article_id") val articleId: String? = null,
 )
