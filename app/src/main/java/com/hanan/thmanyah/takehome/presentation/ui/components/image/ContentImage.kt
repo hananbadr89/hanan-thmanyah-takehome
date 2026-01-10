@@ -1,4 +1,4 @@
-package com.hanan.thmanyah.takehome.presentation.home.components.podcast
+package com.hanan.thmanyah.takehome.presentation.ui.components.image
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
 @Composable
-fun PodcastCover(
+fun ContentImage(
     url: String?,
     modifier: Modifier = Modifier
 ) {

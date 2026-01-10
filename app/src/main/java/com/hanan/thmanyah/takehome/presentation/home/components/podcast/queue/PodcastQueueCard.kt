@@ -16,9 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.hanan.thmanyah.takehome.presentation.home.components.podcast.PodcastCover
 import com.hanan.thmanyah.takehome.presentation.home.components.podcast.PodcastMetaRow
 import com.hanan.thmanyah.takehome.presentation.home.model.PodcastUi
+import com.hanan.thmanyah.takehome.presentation.ui.components.image.ContentImage
 import com.hanan.thmanyah.takehome.presentation.ui.components.text.BodySmallText
 import com.hanan.thmanyah.takehome.presentation.ui.components.text.TitleMediumText
 
@@ -39,7 +39,7 @@ fun PodcastQueueCard(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            PodcastCover(
+            ContentImage(
                 url = item.imageUrl,
                 modifier = Modifier.size(56.dp)
             )

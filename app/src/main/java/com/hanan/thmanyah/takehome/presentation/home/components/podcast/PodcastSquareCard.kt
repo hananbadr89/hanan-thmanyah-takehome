@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hanan.thmanyah.takehome.presentation.home.model.PodcastUi
+import com.hanan.thmanyah.takehome.presentation.ui.components.image.ContentImage
 import com.hanan.thmanyah.takehome.presentation.ui.components.text.TitleSmallText
 import com.hanan.thmanyah.takehome.presentation.ui.theme.ThmanyahTheme
 
@@ -23,7 +24,7 @@ fun PodcastSquareCard(
         modifier = modifier
             .width(140.dp)
     ) {
-        PodcastCover(
+        ContentImage(
             url = item.imageUrl,
             modifier = Modifier
                 .width(140.dp)
