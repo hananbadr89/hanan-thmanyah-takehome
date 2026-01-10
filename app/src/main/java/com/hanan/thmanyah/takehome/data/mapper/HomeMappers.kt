@@ -3,6 +3,7 @@ package com.hanan.thmanyah.takehome.data.mapper
 import com.hanan.thmanyah.takehome.data.remote.dto.HomeContentDto
 import com.hanan.thmanyah.takehome.data.remote.dto.HomeSectionDto
 import com.hanan.thmanyah.takehome.data.remote.dto.HomeSectionsResponseDto
+import com.hanan.thmanyah.takehome.domain.model.AudioBookItem
 import com.hanan.thmanyah.takehome.domain.model.ContentType
 import com.hanan.thmanyah.takehome.domain.model.EpisodeItem
 import com.hanan.thmanyah.takehome.domain.model.HomeItem
@@ -57,6 +58,15 @@ private fun HomeContentDto.toDomainItemOrNull(contentType: ContentType): HomeIte
             releaseDateIso = releaseDate
         )
 
+        ContentType.AUDIO_BOOK -> AudioBookItem(
+            id = audioBookId?.takeIf { it.isNotBlank() } ?: return null,
+            title = name?.takeIf { it.isNotBlank() } ?: return null,
+            imageUrl = avatarUrl,
+            authorName = authorName?.takeIf { it.isNotBlank() },
+            durationSec = duration,
+            releaseDateIso = releaseDate
+        )
+
         ContentType.UNKNOWN -> null
     }
 }
@@ -66,16 +76,18 @@ private fun String.toContentType(): ContentType =
         when (it) {
             "podcast" -> ContentType.PODCAST
             "episode" -> ContentType.EPISODE
+            "audio_book" -> ContentType.AUDIO_BOOK
             else -> ContentType.UNKNOWN
         }
     }
 
 fun String.toSectionLayout(): SectionLayout =
     trim().lowercase().let {
-        when (lowercase()) {
+        when (it) {
             "square" -> SectionLayout.SQUARE
             "queue" -> SectionLayout.QUEUE
             "2_lines_grid" -> SectionLayout.TWO_LINES_GRID
+            "big_square" -> SectionLayout.BIG_SQUARE
             else -> SectionLayout.UNKNOWN
         }
     }
