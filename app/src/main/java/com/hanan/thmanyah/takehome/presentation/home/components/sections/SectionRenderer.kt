@@ -5,6 +5,7 @@ import com.hanan.thmanyah.takehome.domain.model.SectionLayout
 import com.hanan.thmanyah.takehome.presentation.home.components.episode.EpisodeGrid
 import com.hanan.thmanyah.takehome.presentation.home.components.podcast.PodcastSquareRow
 import com.hanan.thmanyah.takehome.presentation.home.components.podcast.queue.PodcastQueueRow
+import com.hanan.thmanyah.takehome.presentation.home.model.AudioBookUi
 import com.hanan.thmanyah.takehome.presentation.home.model.EpisodeUi
 import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionUi
 import com.hanan.thmanyah.takehome.presentation.home.model.PodcastUi
@@ -40,6 +41,16 @@ fun SectionRenderer(
                 EpisodeGrid(
                     title = section.title,
                     items = episodes
+                )
+            }
+        }
+
+        SectionLayout.BIG_SQUARE -> {
+            val audioBook = section.items.filterIsInstance<AudioBookUi>()
+            if (audioBook.isNotEmpty()) {
+                BigSquareAudioBookRow(
+                    title = section.title,
+                    items = audioBook
                 )
             }
         }
