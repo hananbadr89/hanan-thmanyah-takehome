@@ -29,5 +29,9 @@ data class HomeContentDto(
     val language: String? = null,
     val priority: Int? = null,
     val popularityScore: Int? = null,
-    val score: Double? = null
+    val score: Double? = null,
+    @property:Json(name = "episode_id") val episodeId: String? = null,
+    @property:Json(name = "podcast_name") val podcastName: String? = null,
+    @property:Json(name = "release_date") val releaseDate: String? = null,
+    @property:Json(name = "podcastPopularityScore") val podcastPopularityScore: Int? = null,
 )

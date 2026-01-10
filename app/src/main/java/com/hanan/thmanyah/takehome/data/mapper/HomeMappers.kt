@@ -4,6 +4,7 @@ import com.hanan.thmanyah.takehome.data.remote.dto.HomeContentDto
 import com.hanan.thmanyah.takehome.data.remote.dto.HomeSectionDto
 import com.hanan.thmanyah.takehome.data.remote.dto.HomeSectionsResponseDto
 import com.hanan.thmanyah.takehome.domain.model.ContentType
+import com.hanan.thmanyah.takehome.domain.model.EpisodeItem
 import com.hanan.thmanyah.takehome.domain.model.HomeItem
 import com.hanan.thmanyah.takehome.domain.model.HomeSection
 import com.hanan.thmanyah.takehome.domain.model.HomeSectionsPage
@@ -47,6 +48,15 @@ private fun HomeContentDto.toDomainItemOrNull(contentType: ContentType): HomeIte
             )
         }
 
+        ContentType.EPISODE -> EpisodeItem(
+            id = episodeId?.takeIf { it.isNotBlank() } ?: return null,
+            title = name?.takeIf { it.isNotBlank() } ?: return null,
+            podcastName = podcastName?.takeIf { it.isNotBlank() },
+            imageUrl = avatarUrl,
+            durationSec = duration,
+            releaseDateIso = releaseDate
+        )
+
         ContentType.UNKNOWN -> null
     }
 }
@@ -55,6 +65,7 @@ private fun String.toContentType(): ContentType =
     trim().lowercase().let {
         when (it) {
             "podcast" -> ContentType.PODCAST
+            "episode" -> ContentType.EPISODE
             else -> ContentType.UNKNOWN
         }
     }
@@ -64,6 +75,7 @@ fun String.toSectionLayout(): SectionLayout =
         when (lowercase()) {
             "square" -> SectionLayout.SQUARE
             "queue" -> SectionLayout.QUEUE
+            "2_lines_grid" -> SectionLayout.TWO_LINES_GRID
             else -> SectionLayout.UNKNOWN
         }
     }

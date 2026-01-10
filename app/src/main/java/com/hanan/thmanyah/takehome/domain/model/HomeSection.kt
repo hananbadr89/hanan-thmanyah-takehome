@@ -2,12 +2,14 @@ package com.hanan.thmanyah.takehome.domain.model
 
 enum class ContentType {
     PODCAST,
+    EPISODE,
     UNKNOWN
 }
 
 enum class SectionLayout {
     SQUARE,
     QUEUE,
+    TWO_LINES_GRID,
     UNKNOWN
 }
 
@@ -32,4 +34,13 @@ data class PodcastItem(
     val avatarUrl: String?,
     val episodeCount: Int?,
     val duration: Int?
+) : HomeItem
+
+data class EpisodeItem(
+    val id: String,
+    val title: String,
+    val podcastName: String?,
+    val imageUrl: String?,
+    val durationSec: Int?,
+    val releaseDateIso: String?
 ) : HomeItem
