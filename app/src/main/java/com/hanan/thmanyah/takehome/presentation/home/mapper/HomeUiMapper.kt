@@ -2,10 +2,12 @@ package com.hanan.thmanyah.takehome.presentation.home.mapper
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.hanan.thmanyah.takehome.domain.model.AudioBookItem
 import com.hanan.thmanyah.takehome.domain.model.ContentType
 import com.hanan.thmanyah.takehome.domain.model.EpisodeItem
 import com.hanan.thmanyah.takehome.domain.model.HomeSection
 import com.hanan.thmanyah.takehome.domain.model.PodcastItem
+import com.hanan.thmanyah.takehome.presentation.home.model.AudioBookUi
 import com.hanan.thmanyah.takehome.presentation.home.model.EpisodeUi
 import com.hanan.thmanyah.takehome.presentation.home.model.HomeItemUi
 import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionUi
@@ -27,6 +29,10 @@ private fun HomeSection.toUiOrNull(): HomeSectionUi? {
 
         ContentType.EPISODE -> items
             .filterIsInstance<EpisodeItem>()
+            .map { it.toUi() }
+
+        ContentType.AUDIO_BOOK -> items
+            .filterIsInstance<AudioBookItem>()
             .map { it.toUi() }
 
         ContentType.UNKNOWN -> emptyList()
@@ -59,4 +65,13 @@ fun EpisodeItem.toUi(): EpisodeUi = EpisodeUi(
     imageUrl = imageUrl,
     duration = durationSec.formatAsDurationSeconds(),
     release = releaseDateIso?.toYearOrEmpty()
+)
+
+fun AudioBookItem.toUi(): AudioBookUi = AudioBookUi(
+    id = id,
+    title = title,
+    imageUrl = imageUrl,
+    duration = durationSec.formatAsDurationSeconds(),
+    release = releaseDateIso?.toYearOrEmpty(),
+    authorName = authorName
 )

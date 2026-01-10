@@ -27,3 +27,12 @@ data class EpisodeUi(
     val duration: String?,
     val release: String?
 ) : HomeItemUi
+
+data class AudioBookUi(
+    val id: String,
+    val title: String,
+    val authorName: String?,
+    val imageUrl: String?,
+    val duration: String?,
+    val release: String?
+) : HomeItemUi
