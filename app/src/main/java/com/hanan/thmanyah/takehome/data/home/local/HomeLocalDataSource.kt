@@ -5,6 +5,9 @@ import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionsResponseDto
 import com.hanan.thmanyah.takehome.data.home.local.dao.HomeCacheDao
 import com.hanan.thmanyah.takehome.data.home.local.entity.HomeCacheEntity
 import com.squareup.moshi.Moshi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class HomeLocalDataSource @Inject constructor(
@@ -12,6 +15,16 @@ class HomeLocalDataSource @Inject constructor(
     moshi: Moshi
 ) {
     private val adapter = moshi.adapter(SectionsResponseDto::class.java)
+
+    fun observeCached(): Flow<CachedSections?> {
+        return dao.observe()
+            .distinctUntilChanged { old, new -> old?.json == new?.json && old?.updatedAt == new?.updatedAt }
+            .map { entity ->
+                if (entity == null) return@map null
+                val dto = adapter.fromJson(entity.json) ?: return@map null
+                CachedSections(dto = dto, updatedAt = entity.updatedAt)
+            }
+    }
 
     suspend fun getCached(): CachedSections? {
         val entity = dao.get() ?: return null
