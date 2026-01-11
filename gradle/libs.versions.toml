@@ -25,6 +25,9 @@ coil = "2.7.0"
 hilt = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 
+# Room
+room = "2.6.1"
+
 # Tests
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -63,10 +66,16 @@ paging-compose = { group = "androidx.paging", name = "paging-compose", version.r
 # Images
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
-#Hilt
+# Hilt
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+
+# Room
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }
