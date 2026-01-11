@@ -1,6 +1,6 @@
 package com.hanan.thmanyah.takehome.di
 
-import com.hanan.thmanyah.takehome.data.repository.HomeRepositoryImpl
+import com.hanan.thmanyah.takehome.data.home.repository.HomeRepositoryImpl
 import com.hanan.thmanyah.takehome.domain.repository.HomeRepository
 import dagger.Binds
 import dagger.Module

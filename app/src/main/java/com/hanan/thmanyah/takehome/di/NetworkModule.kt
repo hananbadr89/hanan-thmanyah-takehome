@@ -1,6 +1,6 @@
 package com.hanan.thmanyah.takehome.di
 
-import com.hanan.thmanyah.takehome.data.remote.ThmanyahHomeApi
+import com.hanan.thmanyah.takehome.data.home.remote.HomeRemoteDataSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -53,6 +53,6 @@ object NetworkModule {
     @Singleton
     fun provideThmanyahApi(
         retrofit: Retrofit
-    ): ThmanyahHomeApi =
-        retrofit.create(ThmanyahHomeApi::class.java)
+    ): HomeRemoteDataSource =
+        retrofit.create(HomeRemoteDataSource::class.java)
 }

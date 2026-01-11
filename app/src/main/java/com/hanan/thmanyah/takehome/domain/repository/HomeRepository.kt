@@ -1,7 +1,7 @@
 package com.hanan.thmanyah.takehome.domain.repository
 
-import com.hanan.thmanyah.takehome.domain.model.HomeSectionsPage
+import com.hanan.thmanyah.takehome.domain.home.model.section.SectionsPage
 
 interface HomeRepository {
-    suspend fun getHomeSections(): HomeSectionsPage
+    suspend fun getHomeSections(): SectionsPage
 }
