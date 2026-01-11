@@ -6,7 +6,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "home_cache")
 data class HomeCacheEntity(
     @PrimaryKey
-    val id: String = "home",
+    val id: String = CACHE_ID,
     val json: String,
     val updatedAt: Long
-)
+) {
+    companion object {
+        const val CACHE_ID = "home"
+    }
+}

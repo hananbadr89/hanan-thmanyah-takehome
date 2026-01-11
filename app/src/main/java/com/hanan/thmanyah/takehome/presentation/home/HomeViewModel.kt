@@ -2,6 +2,7 @@ package com.hanan.thmanyah.takehome.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hanan.thmanyah.takehome.domain.home.model.RefreshPolicy
 import com.hanan.thmanyah.takehome.domain.usecase.GetHomeSectionsUseCase
 import com.hanan.thmanyah.takehome.presentation.home.mapper.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +28,7 @@ class HomeViewModel @Inject constructor(
             _state.value = HomeUiState.Loading
 
             runCatching {
-                getHomeSections()
+                getHomeSections(RefreshPolicy.CACHE_FIRST)
             }.onSuccess { page ->
                 val uiPage = page.toUi()
                 _state.value = HomeUiState.Content(
