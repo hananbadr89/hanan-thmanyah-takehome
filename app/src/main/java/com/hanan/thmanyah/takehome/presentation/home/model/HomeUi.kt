@@ -1,50 +1,55 @@
 package com.hanan.thmanyah.takehome.presentation.home.model
 
-import com.hanan.thmanyah.takehome.domain.model.ContentType
-import com.hanan.thmanyah.takehome.domain.model.SectionLayout
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import com.hanan.thmanyah.takehome.domain.home.model.section.SectionLayout
 
-data class HomeSectionUi(
-    val title: String,
-    val layout: SectionLayout,
-    val contentType: ContentType,
-    val items: List<HomeItemUi>
+data class HomeSectionsPageUi(
+    val sections: List<HomeSectionUi>
 )
 
-sealed interface HomeItemUi
-
-data class PodcastUi(
+data class HomeSectionUi(
     val id: String,
     val title: String,
-    val description: String?,
-    val imageUrl: String?,
-    val episodes: String?,
-    val duration: String?
-) : HomeItemUi
+    val layout: SectionLayout,
+    val order: Int,
+    val items: List<HomeCardUi>
+)
 
-data class EpisodeUi(
-    val id: String,
-    val title: String,
-    val podcastName: String?,
-    val imageUrl: String?,
-    val duration: String?,
-    val release: String?
-) : HomeItemUi
+sealed interface HomeCardUi {
+    val id: String
+    val composeKey: String
+}
 
-data class AudioBookUi(
-    val id: String,
-    val title: String,
-    val authorName: String?,
+data class SquareCardUi(
+    override val id: String,
+    override val composeKey: String,
     val imageUrl: String?,
-    val duration: String?,
-    val release: String?
-) : HomeItemUi
+    val title: String,
+    val subtitle: String? = null
+) : HomeCardUi
 
-data class AudioArticleUi(
-    val id: String,
-    val title: String,
-    val authorName: String?,
-    val description: String?,
+data class QueueCardUi(
+    override val id: String,
+    override val composeKey: String,
     val imageUrl: String?,
-    val duration: String?,
-    val year: String?
-) : HomeItemUi
+    val title: String,
+    val subtitle: String? = null,
+    val description: String? = null
+) : HomeCardUi
+
+data class GridCardUi(
+    override val id: String,
+    override val composeKey: String,
+    val imageUrl: String?,
+    val title: String,
+    val subtitle: String? = null
+) : HomeCardUi
+
+data class BigSquareCardUi(
+    override val id: String,
+    override val composeKey: String,
+    val imageUrl: String?,
+    val title: String,
+    val subtitle: String? = null,
+) : HomeCardUi

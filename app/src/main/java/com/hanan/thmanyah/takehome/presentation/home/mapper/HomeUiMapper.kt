@@ -1,96 +1,45 @@
 package com.hanan.thmanyah.takehome.presentation.home.mapper
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import com.hanan.thmanyah.takehome.domain.model.AudioArticleItem
-import com.hanan.thmanyah.takehome.domain.model.AudioBookItem
-import com.hanan.thmanyah.takehome.domain.model.ContentType
-import com.hanan.thmanyah.takehome.domain.model.EpisodeItem
-import com.hanan.thmanyah.takehome.domain.model.HomeSection
-import com.hanan.thmanyah.takehome.domain.model.PodcastItem
-import com.hanan.thmanyah.takehome.presentation.home.model.AudioArticleUi
-import com.hanan.thmanyah.takehome.presentation.home.model.AudioBookUi
-import com.hanan.thmanyah.takehome.presentation.home.model.EpisodeUi
-import com.hanan.thmanyah.takehome.presentation.home.model.HomeItemUi
+import com.hanan.thmanyah.takehome.domain.home.model.item.HomeItem
+import com.hanan.thmanyah.takehome.domain.home.model.section.Section
+import com.hanan.thmanyah.takehome.domain.home.model.section.SectionsPage
+import com.hanan.thmanyah.takehome.domain.home.model.section.SectionLayout
+import com.hanan.thmanyah.takehome.presentation.home.model.HomeCardUi
 import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionUi
-import com.hanan.thmanyah.takehome.presentation.home.model.PodcastUi
-import com.hanan.thmanyah.takehome.presentation.util.formatAsDurationSeconds
-import com.hanan.thmanyah.takehome.presentation.util.stripHtml
-import com.hanan.thmanyah.takehome.presentation.util.toYearOrEmpty
+import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionsPageUi
 
-@RequiresApi(Build.VERSION_CODES.O)
-fun List<HomeSection>.toHomeSectionUi(): List<HomeSectionUi> =
-    mapNotNull { it.toUiOrNull() }
+fun SectionsPage.toUi(): HomeSectionsPageUi =
+    HomeSectionsPageUi(
+        sections = sections
+            .sortedBy { it.order }
+            .mapNotNull { it.toUiOrNull() }
+    )
 
-@RequiresApi(Build.VERSION_CODES.O)
-private fun HomeSection.toUiOrNull(): HomeSectionUi? {
-    val uiItems: List<HomeItemUi> = when (contentType) {
-        ContentType.PODCAST -> items
-            .filterIsInstance<PodcastItem>()
-            .map { it.toUi() }
-
-        ContentType.EPISODE -> items
-            .filterIsInstance<EpisodeItem>()
-            .map { it.toUi() }
-
-        ContentType.AUDIO_BOOK -> items
-            .filterIsInstance<AudioBookItem>()
-            .map { it.toUi() }
-
-        ContentType.AUDIO_ARTICLE ->
-            items
-                .filterIsInstance<AudioArticleItem>()
-                .map { it.toUi() }
-
-        ContentType.UNKNOWN -> emptyList()
+fun Section.toUiOrNull(): HomeSectionUi? {
+    val uiItems = items.mapIndexedNotNull { index, item ->
+        item.toLayoutUi(
+            layout = layout,
+            composeKey = "${id}_${item.id}_index_$index"
+        )
     }
-
     if (uiItems.isEmpty()) return null
 
+
     return HomeSectionUi(
-        title = name,
-        layout = type,
-        items = uiItems,
-        contentType = contentType
+        id = id,
+        title = title,
+        layout = layout,
+        order = order,
+        items = uiItems
     )
 }
 
-private fun PodcastItem.toUi(): PodcastUi =
-    PodcastUi(
-        id = id,
-        title = name,
-        description = description?.stripHtml()?.takeIf { it.isNotBlank() },
-        imageUrl = avatarUrl,
-        episodes = episodeCount?.takeIf { it > 0 }?.let { "$it eps" },
-        duration = duration.formatAsDurationSeconds()
-    )
-
-@RequiresApi(Build.VERSION_CODES.O)
-fun EpisodeItem.toUi(): EpisodeUi = EpisodeUi(
-    id = id,
-    title = title,
-    podcastName = podcastName,
-    imageUrl = imageUrl,
-    duration = durationSec.formatAsDurationSeconds(),
-    release = releaseDateIso?.toYearOrEmpty()
-)
-
-fun AudioBookItem.toUi(): AudioBookUi = AudioBookUi(
-    id = id,
-    title = title,
-    imageUrl = imageUrl,
-    duration = durationSec.formatAsDurationSeconds(),
-    release = releaseDateIso?.toYearOrEmpty(),
-    authorName = authorName
-)
-
-private fun AudioArticleItem.toUi(): AudioArticleUi =
-    AudioArticleUi(
-        id = id,
-        title = title,
-        authorName = authorName,
-        description = description,
-        imageUrl = imageUrl,
-        duration = durationSec.formatAsDurationSeconds(),
-        year = releaseDateIso?.toYearOrEmpty()
-    )
+private fun HomeItem.toLayoutUi(layout: SectionLayout,composeKey: String): HomeCardUi? {
+    return when (layout) {
+        SectionLayout.SQUARE -> toSquareUi(composeKey)
+        SectionLayout.QUEUE -> toQueueUi(composeKey)
+        SectionLayout.TWO_LINES_GRID -> toGridUi(composeKey)
+        SectionLayout.BIG_SQUARE -> toBigSquareUi(composeKey)
+        SectionLayout.UNKNOWN -> null
+    }
+}
