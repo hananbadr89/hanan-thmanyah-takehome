@@ -3,7 +3,7 @@ package com.hanan.thmanyah.takehome.presentation.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hanan.thmanyah.takehome.domain.usecase.GetHomeSectionsUseCase
-import com.hanan.thmanyah.takehome.presentation.home.mapper.toHomeSectionUi
+import com.hanan.thmanyah.takehome.presentation.home.mapper.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,11 +24,14 @@ class HomeViewModel @Inject constructor(
 
     private fun loadHome() {
         viewModelScope.launch {
+            _state.value = HomeUiState.Loading
+
             runCatching {
                 getHomeSections()
             }.onSuccess { page ->
+                val uiPage = page.toUi()
                 _state.value = HomeUiState.Content(
-                    sections = page.sections.toHomeSectionUi()
+                    sections = uiPage.sections
                 )
             }.onFailure { throwable ->
                 _state.value = HomeUiState.Error(

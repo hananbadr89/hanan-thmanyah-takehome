@@ -7,7 +7,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun HomeRoute(
-    onPodcastClick: (String) -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
