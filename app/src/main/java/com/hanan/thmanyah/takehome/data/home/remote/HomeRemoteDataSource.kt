@@ -1,6 +1,6 @@
 package com.hanan.thmanyah.takehome.data.home.remote
 
-import com.hanan.thmanyah.takehome.data.home.dto.SectionsResponseDto
+import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionsResponseDto
 import retrofit2.http.GET
 
 interface HomeRemoteDataSource {

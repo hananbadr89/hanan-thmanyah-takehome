@@ -1,10 +1,10 @@
-package com.hanan.thmanyah.takehome.data.home.mapper
+package com.hanan.thmanyah.takehome.data.home.mapper.dto
 
-import com.hanan.thmanyah.takehome.data.home.dto.content.AudioArticleContentDto
-import com.hanan.thmanyah.takehome.data.home.dto.content.AudioBookContentDto
-import com.hanan.thmanyah.takehome.data.home.dto.content.ContentDto
-import com.hanan.thmanyah.takehome.data.home.dto.content.EpisodeContentDto
-import com.hanan.thmanyah.takehome.data.home.dto.content.PodcastContentDto
+import com.hanan.thmanyah.takehome.data.home.remote.dto.content.AudioArticleContentDto
+import com.hanan.thmanyah.takehome.data.home.remote.dto.content.AudioBookContentDto
+import com.hanan.thmanyah.takehome.data.home.remote.dto.content.ContentDto
+import com.hanan.thmanyah.takehome.data.home.remote.dto.content.EpisodeContentDto
+import com.hanan.thmanyah.takehome.data.home.remote.dto.content.PodcastContentDto
 import com.hanan.thmanyah.takehome.domain.home.model.item.AudioArticleItem
 import com.hanan.thmanyah.takehome.domain.home.model.item.AudioBookItem
 import com.hanan.thmanyah.takehome.domain.home.model.item.EpisodeItem

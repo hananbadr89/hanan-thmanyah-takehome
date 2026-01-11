@@ -1,7 +1,7 @@
-package com.hanan.thmanyah.takehome.data.home.mapper
+package com.hanan.thmanyah.takehome.data.home.mapper.dto
 
-import com.hanan.thmanyah.takehome.data.home.dto.SectionDto
-import com.hanan.thmanyah.takehome.data.home.dto.decoder.ContentDecoder
+import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionDto
+import com.hanan.thmanyah.takehome.data.home.mapper.decoder.ContentDecoder
 import com.hanan.thmanyah.takehome.domain.home.model.section.ContentType
 import com.hanan.thmanyah.takehome.domain.home.model.section.Section
 import com.hanan.thmanyah.takehome.domain.home.model.section.SectionLayout

@@ -1,6 +1,6 @@
 package com.hanan.thmanyah.takehome.di
 
-import com.hanan.thmanyah.takehome.data.home.dto.decoder.ContentDecoder
+import com.hanan.thmanyah.takehome.data.home.mapper.decoder.ContentDecoder
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
