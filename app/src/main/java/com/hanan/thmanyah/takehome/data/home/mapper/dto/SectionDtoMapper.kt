@@ -1,5 +1,6 @@
 package com.hanan.thmanyah.takehome.data.home.mapper.dto
 
+import com.hanan.thmanyah.takehome.data.home.local.model.PagingState
 import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionDto
 import com.hanan.thmanyah.takehome.data.home.mapper.decoder.ContentDecoder
 import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionsResponseDto
@@ -44,7 +45,32 @@ fun SectionsResponseDto.toDomainPage(
         .mapNotNull { it.toDomain(decoder) }
         .sortedBy { it.order }
 
-    return SectionsPage(sections)
+    val pagingState = PagingState(
+        currentPage = 1,
+        nextPage = pagination?.nextPage?.takeIf { it.isNotBlank() },
+        totalPages = pagination?.totalPages ?: 1,
+        updatedAt = System.currentTimeMillis()
+    )
+
+    return SectionsPage(
+        sections = sections,
+       paging = pagingState
+    )
+}
+
+fun SectionDto.sectionKey(): String {
+    val safeName = (name ?: "")
+        .trim()
+        .lowercase()
+        .replace(Regex("\\s+"), " ")
+        .replace(Regex("[^a-z0-9 ]"), "")
+
+    return listOf(
+        contentType.orEmpty(),
+        type.orEmpty(),
+        order?.toString().orEmpty(),
+        safeName
+    ).joinToString("|")
 }
 
 private fun SectionDto.stableSectionId(): String =

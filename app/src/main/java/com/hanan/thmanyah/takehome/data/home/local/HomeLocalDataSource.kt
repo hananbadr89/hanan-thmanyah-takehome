@@ -1,8 +1,9 @@
 package com.hanan.thmanyah.takehome.data.home.local
 
-import com.hanan.thmanyah.takehome.data.home.local.dao.CachedSections
+import com.hanan.thmanyah.takehome.data.home.local.model.CachedSections
 import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionsResponseDto
 import com.hanan.thmanyah.takehome.data.home.local.dao.HomeCacheDao
+import com.hanan.thmanyah.takehome.data.home.local.model.PagingState
 import com.hanan.thmanyah.takehome.data.home.local.entity.HomeCacheEntity
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.Flow
@@ -14,35 +15,83 @@ class HomeLocalDataSource @Inject constructor(
     private val dao: HomeCacheDao,
     moshi: Moshi
 ) {
-    private val adapter = moshi.adapter(SectionsResponseDto::class.java)
+    private val sectionAdapter = moshi.adapter(SectionsResponseDto::class.java)
 
     fun observeCached(): Flow<CachedSections?> {
-        return dao.observe()
-            .distinctUntilChanged { old, new -> old?.json == new?.json && old?.updatedAt == new?.updatedAt }
+        return dao.observeSections()
+            .distinctUntilChanged { old, new ->
+                old?.json == new?.json &&
+                        old?.updatedAt == new?.updatedAt &&
+                        old?.currentPage == new?.currentPage &&
+                        old?.nextPage == new?.nextPage &&
+                        old?.totalPages == new?.totalPages
+            }
             .map { entity ->
                 if (entity == null) return@map null
-                val dto = adapter.fromJson(entity.json) ?: return@map null
-                CachedSections(dto = dto, updatedAt = entity.updatedAt)
+
+                val dto = sectionAdapter.fromJson(entity.json) ?: return@map null
+
+                val paging = PagingState(
+                    currentPage = entity.currentPage,
+                    nextPage = entity.nextPage,
+                    totalPages = entity.totalPages,
+                    updatedAt = entity.updatedAt
+                )
+
+                CachedSections(
+                    dto = dto,
+                    paging = paging
+                )
             }
     }
 
     suspend fun getCached(): CachedSections? {
-        val entity = dao.get() ?: return null
-        val dto = adapter.fromJson(entity.json) ?: return null
+        val entity = dao.getSections() ?: return null
+        val dto = sectionAdapter.fromJson(entity.json) ?: return null
+
+        val paging = PagingState(
+            currentPage = entity.currentPage,
+            nextPage = entity.nextPage,
+            totalPages = entity.totalPages,
+            updatedAt = entity.updatedAt
+        )
+
         return CachedSections(
             dto = dto,
-            updatedAt = entity.updatedAt
+            paging = paging
+        )
+    }
+
+    suspend fun saveAggregated(
+        aggregatedDto: SectionsResponseDto,
+        paging: PagingState
+    ) {
+        dao.saveSections(
+            HomeCacheEntity(
+                json = sectionAdapter.toJson(aggregatedDto),
+                updatedAt = paging.updatedAt,
+                currentPage = paging.currentPage,
+                nextPage = paging.nextPage,
+                totalPages = paging.totalPages
+            )
         )
     }
 
     suspend fun save(dto: SectionsResponseDto) {
-        dao.save(
+        val pagination = dto.pagination
+
+        dao.saveSections(
             HomeCacheEntity(
-                json = adapter.toJson(dto),
+                json = sectionAdapter.toJson(dto),
+                currentPage = 1, // first page
+                nextPage = pagination?.nextPage,
+                totalPages = pagination?.totalPages ?: 1,
                 updatedAt = System.currentTimeMillis()
             )
         )
     }
 
-    suspend fun clear() = dao.clear()
+    suspend fun clear() {
+        dao.clearSections()
+    }
 }

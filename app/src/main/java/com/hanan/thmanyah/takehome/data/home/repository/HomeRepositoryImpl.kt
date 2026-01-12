@@ -2,8 +2,10 @@ package com.hanan.thmanyah.takehome.data.home.repository
 
 import com.hanan.thmanyah.takehome.data.home.mapper.decoder.ContentDecoder
 import com.hanan.thmanyah.takehome.data.home.local.HomeLocalDataSource
+import com.hanan.thmanyah.takehome.data.home.mapper.dto.sectionKey
 import com.hanan.thmanyah.takehome.data.home.mapper.dto.toDomainPage
 import com.hanan.thmanyah.takehome.data.home.remote.HomeRemoteDataSource
+import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionDto
 import com.hanan.thmanyah.takehome.di.IoDispatcher
 import com.hanan.thmanyah.takehome.domain.home.model.RefreshPolicy
 import com.hanan.thmanyah.takehome.domain.home.model.section.SectionsPage
@@ -58,8 +60,9 @@ class HomeRepositoryImpl @Inject constructor(
                 RefreshPolicy.CACHE_FIRST -> {
                     val cached = local.getCached()
                     val now = System.currentTimeMillis()
+
                     val isStaleOrEmpty =
-                        cached == null || (now - cached.updatedAt) >= cacheTtlMillis
+                        cached == null || (now - cached.paging.updatedAt) >= cacheTtlMillis
 
                     if (isStaleOrEmpty) {
                         runCatching { refreshHomeSectionsInternal() }
@@ -80,6 +83,45 @@ class HomeRepositoryImpl @Inject constructor(
 
     override suspend fun refreshHomeSections() {
         refreshSignals.tryEmit(Unit)
+    }
+
+    override suspend fun loadNextPage(): Boolean = withContext(io) {
+        val cached = local.getCached() ?: return@withContext false
+        val paging = cached.paging
+        val next = paging.nextPage?.takeIf { it.isNotBlank() } ?: return@withContext false
+
+        val nextDto = remote.getHomeSectionsByPath(next)
+
+        val mergedSections = mergeSections(
+            old = cached.dto.sections.orEmpty(),
+            new = nextDto.sections.orEmpty()
+        )
+
+        val aggregated = cached.dto.copy(
+            sections = mergedSections,
+            pagination = nextDto.pagination
+        )
+
+        val newPaging = paging.copy(
+            nextPage = nextDto.pagination?.nextPage,
+            totalPages = nextDto.pagination?.totalPages ?: paging.totalPages,
+            currentPage = paging.currentPage + 1,
+            updatedAt = System.currentTimeMillis()
+        )
+
+        local.saveAggregated(aggregatedDto = aggregated, paging = newPaging)
+        true
+    }
+
+    private fun mergeSections(
+        old: List<SectionDto>,
+        new: List<SectionDto>
+    ): List<SectionDto> {
+        val map = LinkedHashMap<String, SectionDto>()
+        (old + new).forEach { section ->
+            map.putIfAbsent(section.sectionKey(), section)
+        }
+        return map.values.toList()
     }
 
     private suspend fun refreshHomeSectionsInternal() = withContext(io) {

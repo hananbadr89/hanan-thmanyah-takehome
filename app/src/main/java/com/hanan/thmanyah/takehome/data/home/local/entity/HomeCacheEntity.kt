@@ -8,6 +8,9 @@ data class HomeCacheEntity(
     @PrimaryKey
     val id: String = CACHE_ID,
     val json: String,
+    val currentPage: Int,
+    val nextPage: String?,
+    val totalPages: Int,
     val updatedAt: Long
 ) {
     companion object {

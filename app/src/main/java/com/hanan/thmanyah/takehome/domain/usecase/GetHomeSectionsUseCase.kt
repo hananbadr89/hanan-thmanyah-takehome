@@ -9,6 +9,6 @@ import javax.inject.Inject
 class GetHomeSectionsUseCase @Inject constructor(
     private val repository: HomeRepository
 ) {
-    operator fun invoke(policy: RefreshPolicy =RefreshPolicy.CACHE_FIRST): Flow<SectionsPage> =
+    operator fun invoke(policy: RefreshPolicy = RefreshPolicy.CACHE_FIRST): Flow<SectionsPage> =
         repository.observeHomeSections(policy)
 }

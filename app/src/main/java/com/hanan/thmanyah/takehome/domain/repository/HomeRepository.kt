@@ -5,6 +5,7 @@ import com.hanan.thmanyah.takehome.domain.home.model.section.SectionsPage
 import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
-    fun observeHomeSections(policy: RefreshPolicy = RefreshPolicy.CACHE_FIRST): Flow<SectionsPage>
+    fun observeHomeSections(policy: RefreshPolicy): Flow<SectionsPage>
     suspend fun refreshHomeSections()
+    suspend fun loadNextPage(): Boolean
 }

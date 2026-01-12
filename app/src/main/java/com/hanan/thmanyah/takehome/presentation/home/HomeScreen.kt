@@ -17,7 +17,8 @@ import com.hanan.thmanyah.takehome.presentation.home.components.HomeContent
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    state: HomeUiState
+    state: HomeUiState,
+    onLoadMore: () -> Unit,
 ) {
     Scaffold(
         topBar = { TopAppBar(title = { Text("Home") }) }
@@ -42,7 +43,9 @@ fun HomeScreen(
 
                 is HomeUiState.Content -> {
                     HomeContent(
-                        sections = state.sections
+                        sections = state.page.sections,
+                        canLoadMore = state.page.paging.canLoadMore && !state.isLoadingMore,
+                        onLoadMore = onLoadMore
                     )
                 }
             }

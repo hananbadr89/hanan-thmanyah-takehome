@@ -12,6 +12,7 @@ fun HomeRoute(
     val state by viewModel.state.collectAsState()
 
     HomeScreen(
-        state = state
+        state = state,
+        onLoadMore = { viewModel.loadNextPage() }
     )
 }

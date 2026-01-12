@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface HomeCacheDao {
     @Query("SELECT * FROM home_cache WHERE id = :id LIMIT 1")
-    suspend fun get(id: String = "home"): HomeCacheEntity?
+    suspend fun getSections(id: String = "home"): HomeCacheEntity?
 
     @Query("SELECT * FROM home_cache WHERE id = :id LIMIT 1")
-    fun observe(id: String = HomeCacheEntity.CACHE_ID): Flow<HomeCacheEntity?>
+    fun observeSections(id: String = HomeCacheEntity.CACHE_ID): Flow<HomeCacheEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(entity: HomeCacheEntity)
+    suspend fun saveSections(entity: HomeCacheEntity)
 
     @Query("DELETE FROM home_cache")
-    suspend fun clear()
+    suspend fun clearSections()
 }
