@@ -1,10 +1,9 @@
-package com.hanan.thmanyah.takehome
+package com.hanan.thmanyah.takehome.presentation.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.hanan.thmanyah.takehome.presentation.home.HomeRoute
 import com.hanan.thmanyah.takehome.presentation.ui.theme.ThmanyahTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +14,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ThmanyahTheme {
-                HomeRoute()
+                MainTabsRoute()
             }
         }
     }

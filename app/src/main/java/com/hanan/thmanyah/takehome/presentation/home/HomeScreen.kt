@@ -17,37 +17,32 @@ import com.hanan.thmanyah.takehome.presentation.home.components.HomeContent
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
     state: HomeUiState,
     onLoadMore: () -> Unit,
 ) {
-    Scaffold(
-        topBar = { TopAppBar(title = { Text("Home") }) }
-    ) { padding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-        ) {
-            when (state) {
-                HomeUiState.Loading -> {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                }
+    Box(
+        modifier = modifier.fillMaxSize()
+    ) {
+        when (state) {
+            HomeUiState.Loading -> {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
 
-                is HomeUiState.Error -> {
-                    ErrorState(
-                        message = state.message,
-                        onRetry = {},
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
+            is HomeUiState.Error -> {
+                ErrorState(
+                    message = state.message,
+                    onRetry = {},
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
 
-                is HomeUiState.Content -> {
-                    HomeContent(
-                        sections = state.page.sections,
-                        canLoadMore = state.page.paging.canLoadMore && !state.isLoadingMore,
-                        onLoadMore = onLoadMore
-                    )
-                }
+            is HomeUiState.Content -> {
+                HomeContent(
+                    sections = state.page.sections,
+                    canLoadMore = state.page.paging.canLoadMore && !state.isLoadingMore,
+                    onLoadMore = onLoadMore
+                )
             }
         }
     }
