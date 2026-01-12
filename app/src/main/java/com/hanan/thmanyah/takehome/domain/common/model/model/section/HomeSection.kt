@@ -1,7 +1,7 @@
-package com.hanan.thmanyah.takehome.domain.home.model.section
+package com.hanan.thmanyah.takehome.domain.common.model.model.section
 
 import com.hanan.thmanyah.takehome.data.home.local.model.PagingState
-import com.hanan.thmanyah.takehome.domain.home.model.item.HomeItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.HomeItem
 
 data class SectionsPage(
     val sections: List<Section>,

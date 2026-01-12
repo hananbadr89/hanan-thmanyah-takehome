@@ -1,6 +1,6 @@
-package com.hanan.thmanyah.takehome.domain.usecase
+package com.hanan.thmanyah.takehome.domain.home.usecase
 
-import com.hanan.thmanyah.takehome.domain.repository.HomeRepository
+import com.hanan.thmanyah.takehome.domain.home.repository.HomeRepository
 import javax.inject.Inject
 
 class LoadNextPageUseCase @Inject constructor(

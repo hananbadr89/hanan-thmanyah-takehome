@@ -1,15 +1,15 @@
-package com.hanan.thmanyah.takehome.data.home.mapper.dto
+package com.hanan.thmanyah.takehome.data.common.remote.mapper.dto
 
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.AudioArticleContentDto
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.AudioBookContentDto
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.ContentDto
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.EpisodeContentDto
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.PodcastContentDto
-import com.hanan.thmanyah.takehome.domain.home.model.item.AudioArticleItem
-import com.hanan.thmanyah.takehome.domain.home.model.item.AudioBookItem
-import com.hanan.thmanyah.takehome.domain.home.model.item.EpisodeItem
-import com.hanan.thmanyah.takehome.domain.home.model.item.HomeItem
-import com.hanan.thmanyah.takehome.domain.home.model.item.PodcastItem
+import com.hanan.thmanyah.takehome.data.common.remote.dto.AudioArticleContentDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.AudioBookContentDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.ContentDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.EpisodeContentDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.PodcastContentDto
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.AudioArticleItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.AudioBookItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.EpisodeItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.HomeItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.PodcastItem
 
 fun ContentDto.toDomainItem(): HomeItem? {
     return when (this) {

@@ -1,6 +1,6 @@
 package com.hanan.thmanyah.takehome.data.home.local.model
 
-import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionsResponseDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.SectionsResponseDto
 
 data class CachedSections(
     val dto: SectionsResponseDto,

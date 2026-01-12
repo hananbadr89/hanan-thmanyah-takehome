@@ -1,4 +1,4 @@
-package com.hanan.thmanyah.takehome.data.home.remote.dto
+package com.hanan.thmanyah.takehome.data.common.remote.dto
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

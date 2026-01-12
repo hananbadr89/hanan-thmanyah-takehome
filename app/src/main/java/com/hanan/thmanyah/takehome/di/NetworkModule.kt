@@ -1,6 +1,7 @@
 package com.hanan.thmanyah.takehome.di
 
 import com.hanan.thmanyah.takehome.data.home.remote.HomeRemoteDataSource
+import com.hanan.thmanyah.takehome.data.search.remote.SearchRemoteDataSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -17,7 +18,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://api-v2-b2sit6oh3a-uc.a.run.app/"
+    private const val HOME_BASE_URL = "https://api-v2-b2sit6oh3a-uc.a.run.app/"
+    private const val SEARCH_BASE_URL = "https://api-v2-b2sit6oh3a-uc.a.run.app/"
 
     @Provides
     @Singleton
@@ -39,20 +41,41 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(
+    @HomeApiQualifier
+    fun provideHomeRetrofit(
         moshi: Moshi,
         okHttpClient: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(HOME_BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
     @Provides
     @Singleton
-    fun provideThmanyahApi(
-        retrofit: Retrofit
+    @SearchApiQualifier
+    fun provideSearchRetrofit(
+        moshi: Moshi,
+        okHttpClient: OkHttpClient
+    ): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(SEARCH_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideHomeRemoteDataSource(
+        @HomeApiQualifier retrofit: Retrofit
     ): HomeRemoteDataSource =
         retrofit.create(HomeRemoteDataSource::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSearchRemoteDataSource(
+        @SearchApiQualifier retrofit: Retrofit
+    ): SearchRemoteDataSource =
+        retrofit.create(SearchRemoteDataSource::class.java)
 }

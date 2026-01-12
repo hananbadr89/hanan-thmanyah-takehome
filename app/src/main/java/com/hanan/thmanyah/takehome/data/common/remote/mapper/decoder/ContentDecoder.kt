@@ -1,13 +1,13 @@
-package com.hanan.thmanyah.takehome.data.home.mapper.decoder
+package com.hanan.thmanyah.takehome.data.common.remote.mapper.decoder
 
-import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionDto
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.AudioArticleContentDto
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.AudioBookContentDto
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.ContentDto
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.EpisodeContentDto
-import com.hanan.thmanyah.takehome.data.home.remote.dto.content.PodcastContentDto
-import com.hanan.thmanyah.takehome.domain.home.model.section.ContentType
-import com.hanan.thmanyah.takehome.domain.home.model.section.toContentType
+import com.hanan.thmanyah.takehome.data.common.remote.dto.SectionDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.AudioArticleContentDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.AudioBookContentDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.ContentDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.EpisodeContentDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.PodcastContentDto
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.ContentType
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.toContentType
 import com.squareup.moshi.Moshi
 
 class ContentDecoder(

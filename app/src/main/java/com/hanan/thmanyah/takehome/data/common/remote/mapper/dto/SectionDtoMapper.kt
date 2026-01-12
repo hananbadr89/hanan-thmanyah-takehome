@@ -1,15 +1,15 @@
-package com.hanan.thmanyah.takehome.data.home.mapper.dto
+package com.hanan.thmanyah.takehome.data.common.remote.mapper.dto
 
 import com.hanan.thmanyah.takehome.data.home.local.model.PagingState
-import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionDto
-import com.hanan.thmanyah.takehome.data.home.mapper.decoder.ContentDecoder
-import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionsResponseDto
-import com.hanan.thmanyah.takehome.domain.home.model.section.ContentType
-import com.hanan.thmanyah.takehome.domain.home.model.section.Section
-import com.hanan.thmanyah.takehome.domain.home.model.section.SectionLayout
-import com.hanan.thmanyah.takehome.domain.home.model.section.SectionsPage
-import com.hanan.thmanyah.takehome.domain.home.model.section.toContentType
-import com.hanan.thmanyah.takehome.domain.home.model.section.toSectionLayout
+import com.hanan.thmanyah.takehome.data.common.remote.dto.SectionDto
+import com.hanan.thmanyah.takehome.data.common.remote.mapper.decoder.ContentDecoder
+import com.hanan.thmanyah.takehome.data.common.remote.dto.SectionsResponseDto
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.ContentType
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.Section
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionLayout
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionsPage
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.toContentType
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.toSectionLayout
 import kotlin.collections.mapNotNull
 import kotlin.collections.orEmpty
 

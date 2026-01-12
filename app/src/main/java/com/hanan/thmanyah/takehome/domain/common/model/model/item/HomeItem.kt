@@ -1,4 +1,4 @@
-package com.hanan.thmanyah.takehome.domain.home.model.item
+package com.hanan.thmanyah.takehome.domain.common.model.model.item
 
 sealed interface HomeItem {
     val id: String

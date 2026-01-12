@@ -1,4 +1,4 @@
-package com.hanan.thmanyah.takehome.domain.home.model.section
+package com.hanan.thmanyah.takehome.domain.common.model.model.section
 
 enum class ContentType {
     PODCAST,

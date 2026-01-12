@@ -1,7 +1,7 @@
 package com.hanan.thmanyah.takehome.data.home.local
 
 import com.hanan.thmanyah.takehome.data.home.local.model.CachedSections
-import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionsResponseDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.SectionsResponseDto
 import com.hanan.thmanyah.takehome.data.home.local.dao.HomeCacheDao
 import com.hanan.thmanyah.takehome.data.home.local.model.PagingState
 import com.hanan.thmanyah.takehome.data.home.local.entity.HomeCacheEntity

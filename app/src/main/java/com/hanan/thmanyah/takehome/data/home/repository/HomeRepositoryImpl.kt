@@ -1,15 +1,15 @@
 package com.hanan.thmanyah.takehome.data.home.repository
 
-import com.hanan.thmanyah.takehome.data.home.mapper.decoder.ContentDecoder
+import com.hanan.thmanyah.takehome.data.common.remote.mapper.decoder.ContentDecoder
 import com.hanan.thmanyah.takehome.data.home.local.HomeLocalDataSource
-import com.hanan.thmanyah.takehome.data.home.mapper.dto.sectionKey
-import com.hanan.thmanyah.takehome.data.home.mapper.dto.toDomainPage
+import com.hanan.thmanyah.takehome.data.common.remote.mapper.dto.sectionKey
+import com.hanan.thmanyah.takehome.data.common.remote.mapper.dto.toDomainPage
 import com.hanan.thmanyah.takehome.data.home.remote.HomeRemoteDataSource
-import com.hanan.thmanyah.takehome.data.home.remote.dto.SectionDto
+import com.hanan.thmanyah.takehome.data.common.remote.dto.SectionDto
 import com.hanan.thmanyah.takehome.di.IoDispatcher
 import com.hanan.thmanyah.takehome.domain.home.model.RefreshPolicy
-import com.hanan.thmanyah.takehome.domain.home.model.section.SectionsPage
-import com.hanan.thmanyah.takehome.domain.repository.HomeRepository
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionsPage
+import com.hanan.thmanyah.takehome.domain.home.repository.HomeRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.awaitClose
