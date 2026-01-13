@@ -10,7 +10,7 @@ data class SquareCardUi(
     override val composeKey: String,
     val imageUrl: String?,
     val title: String,
-    val subtitle: String? = null
+    val meta: String? = null
 ) : CardUi
 
 data class QueueCardUi(
@@ -18,8 +18,8 @@ data class QueueCardUi(
     override val composeKey: String,
     val imageUrl: String?,
     val title: String,
-    val subtitle: String? = null,
-    val description: String? = null
+    val meta1: String? = null,
+    val meta2: String? = null
 ) : CardUi
 
 data class GridCardUi(
@@ -27,7 +27,8 @@ data class GridCardUi(
     override val composeKey: String,
     val imageUrl: String?,
     val title: String,
-    val subtitle: String? = null
+    val meta1: String? = null,
+    val meta2: String? = null,
 ) : CardUi
 
 data class BigSquareCardUi(
@@ -35,5 +36,5 @@ data class BigSquareCardUi(
     override val composeKey: String,
     val imageUrl: String?,
     val title: String,
-    val subtitle: String? = null,
+    val meta: String? = null,
 ) : CardUi

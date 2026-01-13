@@ -17,7 +17,7 @@ fun ContentImage(
         model = url,
         contentDescription = null,
         modifier = modifier
-            .clip(RoundedCornerShape(14.dp)),
+            .clip(RoundedCornerShape(12.dp)),
         contentScale = ContentScale.Crop
     )
 }

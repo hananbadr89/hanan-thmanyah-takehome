@@ -1,22 +1,22 @@
 package com.hanan.thmanyah.takehome.presentation.mapper
 
-import com.hanan.thmanyah.takehome.domain.common.model.model.item.AudioArticleItem
-import com.hanan.thmanyah.takehome.domain.common.model.model.item.AudioBookItem
-import com.hanan.thmanyah.takehome.domain.common.model.model.item.EpisodeItem
 import com.hanan.thmanyah.takehome.domain.common.model.model.item.HomeItem
 import com.hanan.thmanyah.takehome.domain.common.model.model.item.PodcastItem
 import com.hanan.thmanyah.takehome.presentation.model.card.BigSquareCardUi
 import com.hanan.thmanyah.takehome.presentation.model.card.GridCardUi
 import com.hanan.thmanyah.takehome.presentation.model.card.QueueCardUi
 import com.hanan.thmanyah.takehome.presentation.model.card.SquareCardUi
-import com.hanan.thmanyah.takehome.presentation.util.stripHtml
 
 fun HomeItem.toSquareUi(composeKey: String): SquareCardUi =
     SquareCardUi(
         id = id,
         composeKey = composeKey,
         title = title,
-        imageUrl = imageUrl
+        imageUrl = imageUrl,
+        meta = when (this) {
+            is PodcastItem -> podcastMeta()
+            else -> durationMeta()
+        }
     )
 
 fun HomeItem.toQueueUi(composeKey: String): QueueCardUi =
@@ -25,11 +25,11 @@ fun HomeItem.toQueueUi(composeKey: String): QueueCardUi =
         composeKey = composeKey,
         title = title,
         imageUrl = imageUrl,
-        description = when (this) {
-            is PodcastItem -> description?.stripHtml()?.takeIf { it.isNotBlank() }
-            is AudioArticleItem -> description?.stripHtml()?.takeIf { it.isNotBlank() }
-            else -> null
-        }
+        meta1 = when (this) {
+            is PodcastItem -> podcastMeta()
+            else -> durationMeta()
+        },
+        meta2 = cleanedDescription()
     )
 
 fun HomeItem.toGridUi(composeKey: String): GridCardUi =
@@ -38,12 +38,11 @@ fun HomeItem.toGridUi(composeKey: String): GridCardUi =
         composeKey = composeKey,
         title = title,
         imageUrl = imageUrl,
-        subtitle = when (this) {
-            is EpisodeItem -> podcastName
-            is AudioBookItem -> authorName
-            is AudioArticleItem -> authorName
-            else -> null
-        }
+        meta1 = primaryMeta(),
+        meta2 = when (this) {
+            is PodcastItem -> podcastMeta()
+            else -> durationMeta()
+        },
     )
 
 fun HomeItem.toBigSquareUi(composeKey: String): BigSquareCardUi =
@@ -52,10 +51,5 @@ fun HomeItem.toBigSquareUi(composeKey: String): BigSquareCardUi =
         composeKey = composeKey,
         title = title,
         imageUrl = imageUrl,
-        subtitle = when (this) {
-            is EpisodeItem -> podcastName
-            is AudioBookItem -> authorName
-            is AudioArticleItem -> authorName
-            is PodcastItem -> description
-        }
+        meta = primaryMeta()
     )

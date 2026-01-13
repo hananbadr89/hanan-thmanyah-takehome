@@ -26,25 +26,29 @@ fun QueueCard(
 ) {
     Row(
         modifier = modifier
-            .width(300.dp)
-            .padding(12.dp)
+            .width(200.dp)
+            .padding(2.dp)
     ) {
         ContentImage(url = item.imageUrl, modifier = Modifier.size(56.dp))
+
         Spacer(Modifier.width(12.dp))
 
         Column(modifier = Modifier.weight(1f)) {
+
             TitleMediumText(text = item.title, maxLines = 1)
-            item.subtitle?.let {
+
+            item.meta1?.let {
                 Spacer(Modifier.height(4.dp))
                 BodySmallText(
                     text = it,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f)
                 )
             }
-            item.description?.takeIf { it.isNotBlank() }?.let {
-                Spacer(Modifier.height(4.dp))
+
+            item.meta2?.takeIf { it.isNotBlank() }?.let {
+                Spacer(Modifier.height(2.dp))
                 BodySmallText(
                     text = it,
                     maxLines = 1,
@@ -66,8 +70,8 @@ private fun QueueCardPreview() {
                 composeKey = "queue_1",
                 title = "The Daily",
                 imageUrl = "https://media.npr.org/assets/img/2018/08/03/npr_tbl_podcasttile_sq-284e5618e2b2df0f3158b076d5bc44751e78e1b6.jpg",
-                subtitle = "90 episodes · 2h 5m",
-                description = "This is what the news should sound like."
+                meta1 = "90 episodes · 2h 5m",
+                meta2 = "This is what the news should sound like."
             ),
             modifier = Modifier.padding(16.dp)
         )

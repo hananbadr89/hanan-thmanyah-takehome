@@ -32,7 +32,7 @@ fun BigSquareCard(
         )
         Spacer(Modifier.height(6.dp))
         TitleMediumText(text = item.title, maxLines = 1)
-        item.subtitle?.let {
+        item.meta?.let {
             Spacer(Modifier.height(2.dp))
             BodySmallText(
                 text = it,
@@ -53,7 +53,7 @@ private fun BigSquareCardPreview() {
                 composeKey = "1",
                 title = "The Art of War",
                 imageUrl = "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
-                subtitle = "Sun Tzu · Audiobook"
+                meta = "Sun Tzu · Audiobook"
             ),
             modifier = Modifier
                 .padding(16.dp)

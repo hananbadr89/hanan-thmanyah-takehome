@@ -12,6 +12,8 @@ fun SectionHeader(
 ) {
     TitleLargeText(
         text = title,
-        modifier = Modifier.padding(horizontal = 16.dp)
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .padding(bottom = 8.dp)
     )
 }

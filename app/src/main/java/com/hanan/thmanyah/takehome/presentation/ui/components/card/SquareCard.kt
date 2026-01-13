@@ -2,6 +2,7 @@ package com.hanan.thmanyah.takehome.presentation.ui.components.card
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -18,25 +19,34 @@ import com.hanan.thmanyah.takehome.presentation.ui.components.text.TitleSmallTex
 import com.hanan.thmanyah.takehome.presentation.ui.theme.ThmanyahTheme
 
 @Composable
-fun SquareCard(item: SquareCardUi, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.width(140.dp)) {
+fun SquareCard(
+    item: SquareCardUi,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.width(140.dp)
+    ) {
         ContentImage(
             url = item.imageUrl,
             modifier = Modifier
-                .width(140.dp)
+                .fillMaxWidth()
                 .height(100.dp)
         )
 
-        Spacer(Modifier.height(6.dp))
-        TitleSmallText(text = item.title, maxLines = 1)
+        Spacer(Modifier.height(8.dp))
 
-        item.subtitle?.let {
-            Spacer(Modifier.height(2.dp))
+        TitleSmallText(
+            text = item.title,
+            maxLines = 1,
+        )
+
+        item.meta?.let {
+            Spacer(Modifier.height(4.dp))
             BodySmallText(
                 text = it,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.55f)
             )
         }
     }
@@ -54,7 +64,7 @@ private fun SquareCardPreview() {
                 composeKey = "square_1",
                 title = "The Big Listen",
                 imageUrl = "https://media.npr.org/assets/img/2018/08/03/npr_tbl_podcasttile_sq-284e5618e2b2df0f3158b076d5bc44751e78e1b6.jpg",
-                subtitle = "90 eps · 2h 5m"
+                meta = "90 eps · 2h 5m"
             ),
             modifier = Modifier.padding(16.dp)
         )
