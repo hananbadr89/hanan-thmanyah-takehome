@@ -1,29 +1,6 @@
-package com.hanan.thmanyah.takehome.presentation.home.model
+package com.hanan.thmanyah.takehome.presentation.model.card
 
-import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionLayout
-
-data class HomeSectionsPageUi(
-    val sections: List<HomeSectionUi>,
-    val paging: HomePagingUi?
-)
-
-data class HomePagingUi(
-    val currentPage: Int?,
-    val nextPage: String?,
-    val totalPages: Int?
-) {
-    val canLoadMore: Boolean get() = !nextPage.isNullOrBlank()
-}
-
-data class HomeSectionUi(
-    val id: String,
-    val title: String,
-    val layout: SectionLayout,
-    val order: Any,
-    val items: List<HomeCardUi>
-)
-
-sealed interface HomeCardUi {
+sealed interface CardUi {
     val id: String
     val composeKey: String
 }
@@ -34,7 +11,7 @@ data class SquareCardUi(
     val imageUrl: String?,
     val title: String,
     val subtitle: String? = null
-) : HomeCardUi
+) : CardUi
 
 data class QueueCardUi(
     override val id: String,
@@ -43,7 +20,7 @@ data class QueueCardUi(
     val title: String,
     val subtitle: String? = null,
     val description: String? = null
-) : HomeCardUi
+) : CardUi
 
 data class GridCardUi(
     override val id: String,
@@ -51,7 +28,7 @@ data class GridCardUi(
     val imageUrl: String?,
     val title: String,
     val subtitle: String? = null
-) : HomeCardUi
+) : CardUi
 
 data class BigSquareCardUi(
     override val id: String,
@@ -59,4 +36,4 @@ data class BigSquareCardUi(
     val imageUrl: String?,
     val title: String,
     val subtitle: String? = null,
-) : HomeCardUi
+) : CardUi

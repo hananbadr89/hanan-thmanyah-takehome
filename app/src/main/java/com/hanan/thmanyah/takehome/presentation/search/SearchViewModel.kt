@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionsPage
 import com.hanan.thmanyah.takehome.domain.search.usecase.SearchUseCase
-import com.hanan.thmanyah.takehome.presentation.home.mapper.toUi
+import com.hanan.thmanyah.takehome.presentation.mapper.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

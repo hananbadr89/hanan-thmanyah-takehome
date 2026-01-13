@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hanan.thmanyah.takehome.domain.home.usecase.GetHomeSectionsUseCase
 import com.hanan.thmanyah.takehome.domain.home.usecase.LoadNextPageUseCase
-import com.hanan.thmanyah.takehome.presentation.home.mapper.toUi
+import com.hanan.thmanyah.takehome.presentation.mapper.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

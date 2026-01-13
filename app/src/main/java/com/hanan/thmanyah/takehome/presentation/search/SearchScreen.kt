@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hanan.thmanyah.takehome.presentation.home.components.ErrorState
-import com.hanan.thmanyah.takehome.presentation.home.components.HomeContent
+import com.hanan.thmanyah.takehome.presentation.ui.components.error.ErrorState
+import com.hanan.thmanyah.takehome.presentation.ui.components.sections.SectionsContent
 import com.hanan.thmanyah.takehome.presentation.search.components.NoResults
 import com.hanan.thmanyah.takehome.presentation.search.components.SearchEmptyHint
 import com.hanan.thmanyah.takehome.presentation.search.components.SearchField
@@ -75,7 +75,7 @@ fun SearchScreen(
                             modifier = Modifier.fillMaxSize()
                         )
                     } else {
-                        HomeContent(
+                        SectionsContent(
                             sections = state.page.sections,
                             modifier = Modifier.fillMaxSize(),
                             onLoadMore = {},

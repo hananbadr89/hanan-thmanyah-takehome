@@ -1,4 +1,4 @@
-package com.hanan.thmanyah.takehome.presentation.home.components
+package com.hanan.thmanyah.takehome.presentation.ui.components.error
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

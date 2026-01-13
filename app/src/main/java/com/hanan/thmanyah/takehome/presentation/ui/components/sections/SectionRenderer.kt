@@ -1,12 +1,12 @@
-package com.hanan.thmanyah.takehome.presentation.home.components
+package com.hanan.thmanyah.takehome.presentation.ui.components.sections
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionUi
+import com.hanan.thmanyah.takehome.presentation.model.section.SectionUi
 
 @Composable
 fun SectionRenderer(
-    section: HomeSectionUi,
+    section: SectionUi,
     modifier: Modifier = Modifier
 ) {
     val layoutRenderer = RendererFactory.layoutRenderer(section.layout) ?: return
@@ -17,6 +17,6 @@ fun SectionRenderer(
         items = section.items,
         modifier = modifier,
         key = { _, item -> item.composeKey },
-        itemContent = { item -> RendererFactory.HomeCardRenderer(item) }
+        itemContent = { item -> RendererFactory.CardRenderer(item) }
     )
 }

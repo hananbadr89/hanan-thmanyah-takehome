@@ -7,8 +7,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.hanan.thmanyah.takehome.presentation.home.components.ErrorState
-import com.hanan.thmanyah.takehome.presentation.home.components.HomeContent
+import com.hanan.thmanyah.takehome.presentation.ui.components.error.ErrorState
+import com.hanan.thmanyah.takehome.presentation.ui.components.sections.SectionsContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,7 +34,7 @@ fun HomeScreen(
             }
 
             is HomeUiState.Content -> {
-                HomeContent(
+                SectionsContent(
                     sections = state.page.sections,
                     canLoadMore = state.page.paging?.canLoadMore == true && !state.isLoadingMore,
                     onLoadMore = onLoadMore

@@ -1,4 +1,4 @@
-package com.hanan.thmanyah.takehome.presentation.home.rendering.layouts
+package com.hanan.thmanyah.takehome.presentation.ui.sectionsrendering.layouts
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,20 +11,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
-import com.hanan.thmanyah.takehome.presentation.home.components.section.SectionHeader
-import com.hanan.thmanyah.takehome.presentation.home.model.GridCardUi
-import com.hanan.thmanyah.takehome.presentation.home.model.HomeCardUi
-import com.hanan.thmanyah.takehome.presentation.home.rendering.LayoutRenderer
+import com.hanan.thmanyah.takehome.presentation.model.card.CardUi
+import com.hanan.thmanyah.takehome.presentation.model.card.GridCardUi
+import com.hanan.thmanyah.takehome.presentation.ui.components.sections.SectionHeader
+import com.hanan.thmanyah.takehome.presentation.ui.sectionsrendering.LayoutRenderer
 
 object TwoLinesGridLayoutRenderer : LayoutRenderer {
 
     @Composable
     override fun Render(
         title: String,
-        items: List<HomeCardUi>,
+        items: List<CardUi>,
         modifier: Modifier,
-        key: (index: Int, item: HomeCardUi) -> Any,
-        itemContent: @Composable (item: HomeCardUi) -> Unit
+        key: (index: Int, item: CardUi) -> Any,
+        itemContent: @Composable (item: CardUi) -> Unit
     ) {
         val gridItems = items.filterIsInstance<GridCardUi>()
         if (gridItems.isEmpty()) return

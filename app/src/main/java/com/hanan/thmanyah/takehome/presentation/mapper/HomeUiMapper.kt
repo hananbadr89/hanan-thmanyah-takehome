@@ -1,25 +1,25 @@
-package com.hanan.thmanyah.takehome.presentation.home.mapper
+package com.hanan.thmanyah.takehome.presentation.mapper
 
 import com.hanan.thmanyah.takehome.domain.common.model.model.item.HomeItem
 import com.hanan.thmanyah.takehome.domain.common.model.model.section.Section
 import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionsPage
 import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionLayout
-import com.hanan.thmanyah.takehome.presentation.home.model.HomeCardUi
-import com.hanan.thmanyah.takehome.presentation.home.model.HomePagingUi
-import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionUi
-import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionsPageUi
+import com.hanan.thmanyah.takehome.presentation.model.card.CardUi
+import com.hanan.thmanyah.takehome.presentation.model.section.PagingUi
+import com.hanan.thmanyah.takehome.presentation.model.section.SectionUi
+import com.hanan.thmanyah.takehome.presentation.model.section.SectionsPageUi
 
-fun SectionsPage.toUi(): HomeSectionsPageUi =
-    HomeSectionsPageUi(
+fun SectionsPage.toUi(): SectionsPageUi =
+    SectionsPageUi(
         sections = sections.mapNotNull { it.toUiOrNull() },
-        paging = HomePagingUi(
+        paging = PagingUi(
             currentPage = paging?.currentPage,
             nextPage = paging?.nextPage,
             totalPages = paging?.totalPages
         )
     )
 
-fun Section.toUiOrNull(): HomeSectionUi? {
+fun Section.toUiOrNull(): SectionUi? {
     val uiItems = items.mapIndexedNotNull { index, item ->
         item.toLayoutUi(
             layout = layout,
@@ -29,7 +29,7 @@ fun Section.toUiOrNull(): HomeSectionUi? {
     if (uiItems.isEmpty()) return null
 
 
-    return HomeSectionUi(
+    return SectionUi(
         id = id,
         title = title,
         layout = layout,
@@ -38,7 +38,7 @@ fun Section.toUiOrNull(): HomeSectionUi? {
     )
 }
 
-private fun HomeItem.toLayoutUi(layout: SectionLayout, composeKey: String): HomeCardUi? {
+private fun HomeItem.toLayoutUi(layout: SectionLayout, composeKey: String): CardUi? {
     return when (layout) {
         SectionLayout.SQUARE -> toSquareUi(composeKey)
         SectionLayout.QUEUE -> toQueueUi(composeKey)

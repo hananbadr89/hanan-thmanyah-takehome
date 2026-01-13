@@ -1,4 +1,4 @@
-package com.hanan.thmanyah.takehome.presentation.home.rendering.card
+package com.hanan.thmanyah.takehome.presentation.ui.components.card
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hanan.thmanyah.takehome.presentation.home.model.SquareCardUi
+import com.hanan.thmanyah.takehome.presentation.model.card.SquareCardUi
 import com.hanan.thmanyah.takehome.presentation.ui.components.image.ContentImage
 import com.hanan.thmanyah.takehome.presentation.ui.components.text.BodySmallText
 import com.hanan.thmanyah.takehome.presentation.ui.components.text.TitleSmallText

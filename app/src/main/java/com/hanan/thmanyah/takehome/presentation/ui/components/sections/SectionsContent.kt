@@ -1,4 +1,4 @@
-package com.hanan.thmanyah.takehome.presentation.home.components
+package com.hanan.thmanyah.takehome.presentation.ui.components.sections
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,12 +11,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionUi
+import com.hanan.thmanyah.takehome.presentation.model.section.SectionUi
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
-fun HomeContent(
-    sections: List<HomeSectionUi>,
+fun SectionsContent(
+    sections: List<SectionUi>,
     onLoadMore: () -> Unit,
     canLoadMore: Boolean,
     modifier: Modifier = Modifier

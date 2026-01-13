@@ -1,14 +1,14 @@
-package com.hanan.thmanyah.takehome.presentation.home.mapper
+package com.hanan.thmanyah.takehome.presentation.mapper
 
 import com.hanan.thmanyah.takehome.domain.common.model.model.item.AudioArticleItem
 import com.hanan.thmanyah.takehome.domain.common.model.model.item.AudioBookItem
 import com.hanan.thmanyah.takehome.domain.common.model.model.item.EpisodeItem
 import com.hanan.thmanyah.takehome.domain.common.model.model.item.HomeItem
 import com.hanan.thmanyah.takehome.domain.common.model.model.item.PodcastItem
-import com.hanan.thmanyah.takehome.presentation.home.model.BigSquareCardUi
-import com.hanan.thmanyah.takehome.presentation.home.model.GridCardUi
-import com.hanan.thmanyah.takehome.presentation.home.model.QueueCardUi
-import com.hanan.thmanyah.takehome.presentation.home.model.SquareCardUi
+import com.hanan.thmanyah.takehome.presentation.model.card.BigSquareCardUi
+import com.hanan.thmanyah.takehome.presentation.model.card.GridCardUi
+import com.hanan.thmanyah.takehome.presentation.model.card.QueueCardUi
+import com.hanan.thmanyah.takehome.presentation.model.card.SquareCardUi
 import com.hanan.thmanyah.takehome.presentation.util.stripHtml
 
 fun HomeItem.toSquareUi(composeKey: String): SquareCardUi =

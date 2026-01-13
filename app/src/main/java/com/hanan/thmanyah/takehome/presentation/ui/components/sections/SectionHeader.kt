@@ -1,4 +1,4 @@
-package com.hanan.thmanyah.takehome.presentation.home.components.section
+package com.hanan.thmanyah.takehome.presentation.ui.components.sections
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
