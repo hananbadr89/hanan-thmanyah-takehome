@@ -5,6 +5,5 @@ fun Any?.toIntOrNull(): Int? = when (this) {
     is Double -> this.toInt()
     is Float -> this.toInt()
     is Long -> this.toInt()
-    is String -> this.toIntOrNull()
     else -> null
 }
