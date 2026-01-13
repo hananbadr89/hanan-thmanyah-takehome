@@ -10,7 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.hanan.thmanyah.takehome.presentation.home.HomeTestTags
 
 @Composable
 fun ErrorState(
@@ -27,6 +29,9 @@ fun ErrorState(
             style = MaterialTheme.typography.bodyLarge
         )
         Spacer(Modifier.height(12.dp))
-        Button(onClick = onRetry) { Text("Retry") }
+        Button(
+            onClick = onRetry,
+            modifier = Modifier.testTag(HomeTestTags.RETRY)
+        ) { Text("Retry") }
     }
 }

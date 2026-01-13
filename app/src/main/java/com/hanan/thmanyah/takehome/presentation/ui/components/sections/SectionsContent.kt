@@ -10,7 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.hanan.thmanyah.takehome.presentation.home.HomeTestTags
 import com.hanan.thmanyah.takehome.presentation.model.section.SectionUi
 import kotlinx.coroutines.flow.distinctUntilChanged
 
@@ -45,7 +47,7 @@ fun SectionsContent(
 
     LazyColumn(
         state = listState,
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().testTag(HomeTestTags.LIST),
         contentPadding = PaddingValues(vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {

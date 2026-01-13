@@ -7,6 +7,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import com.hanan.thmanyah.takehome.presentation.ui.components.error.ErrorState
 import com.hanan.thmanyah.takehome.presentation.ui.components.sections.SectionsContent
 
@@ -22,14 +23,20 @@ fun HomeScreen(
     ) {
         when (state) {
             HomeUiState.Loading -> {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .testTag(HomeTestTags.LOADING)
+                )
             }
 
             is HomeUiState.Error -> {
                 ErrorState(
                     message = state.message,
                     onRetry = {},
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .testTag(HomeTestTags.ERROR)
                 )
             }
 
