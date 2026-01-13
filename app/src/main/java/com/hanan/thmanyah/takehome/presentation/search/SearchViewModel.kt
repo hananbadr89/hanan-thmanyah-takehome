@@ -2,7 +2,6 @@ package com.hanan.thmanyah.takehome.presentation.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionsPage
 import com.hanan.thmanyah.takehome.domain.search.usecase.SearchUseCase
 import com.hanan.thmanyah.takehome.presentation.mapper.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -64,7 +63,6 @@ class SearchViewModel @Inject constructor(
                     emit(searchUseCase(query))
                 }.catch { e ->
                     _state.value = SearchUiState.Error(e.message.orEmpty())
-                    emit(SectionsPage(sections = emptyList()))
                 }
             }
             .onEach { sections ->
