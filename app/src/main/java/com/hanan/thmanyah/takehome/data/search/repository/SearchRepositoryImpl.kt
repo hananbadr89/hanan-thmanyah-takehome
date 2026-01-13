@@ -12,7 +12,7 @@ class SearchRepositoryImpl @Inject constructor(
     private val decoder: ContentDecoder
 ) : SearchRepository {
 
-    override suspend fun search(): SectionsPage {
+    override suspend fun search(query: String): SectionsPage {
         return remote.search().toDomainPage(decoder)
     }
 }

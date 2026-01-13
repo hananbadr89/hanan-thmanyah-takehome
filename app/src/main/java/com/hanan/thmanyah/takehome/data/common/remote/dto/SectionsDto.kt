@@ -15,7 +15,7 @@ data class SectionDto(
     val type: String? = null,
     @property:Json(name = "content_type")
     val contentType: String? = null,
-    val order: Int? = null,
+    val order: Any? = null,
     val content: List<Map<String, Any?>>? = null
 )
 

@@ -5,7 +5,7 @@ import com.hanan.thmanyah.takehome.domain.common.model.model.item.HomeItem
 
 data class SectionsPage(
     val sections: List<Section>,
-    val paging: PagingState
+    val paging: PagingState? = null
 )
 
 data class Section(
@@ -13,6 +13,6 @@ data class Section(
     val title: String,
     val layout: SectionLayout,
     val contentType: ContentType,
-    val order: Int,
+    val order: Any,
     val items: List<HomeItem>
 )

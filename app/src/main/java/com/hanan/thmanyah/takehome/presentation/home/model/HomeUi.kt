@@ -1,16 +1,16 @@
 package com.hanan.thmanyah.takehome.presentation.home.model
 
-import com.hanan.thmanyah.takehome.domain.home.model.section.SectionLayout
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionLayout
 
 data class HomeSectionsPageUi(
     val sections: List<HomeSectionUi>,
-    val paging: HomePagingUi
+    val paging: HomePagingUi?
 )
 
 data class HomePagingUi(
-    val currentPage: Int,
+    val currentPage: Int?,
     val nextPage: String?,
-    val totalPages: Int
+    val totalPages: Int?
 ) {
     val canLoadMore: Boolean get() = !nextPage.isNullOrBlank()
 }
@@ -19,7 +19,7 @@ data class HomeSectionUi(
     val id: String,
     val title: String,
     val layout: SectionLayout,
-    val order: Int,
+    val order: Any,
     val items: List<HomeCardUi>
 )
 

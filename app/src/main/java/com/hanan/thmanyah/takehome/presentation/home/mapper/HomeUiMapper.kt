@@ -1,9 +1,9 @@
 package com.hanan.thmanyah.takehome.presentation.home.mapper
 
-import com.hanan.thmanyah.takehome.domain.home.model.item.HomeItem
-import com.hanan.thmanyah.takehome.domain.home.model.section.Section
-import com.hanan.thmanyah.takehome.domain.home.model.section.SectionsPage
-import com.hanan.thmanyah.takehome.domain.home.model.section.SectionLayout
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.HomeItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.Section
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionsPage
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionLayout
 import com.hanan.thmanyah.takehome.presentation.home.model.HomeCardUi
 import com.hanan.thmanyah.takehome.presentation.home.model.HomePagingUi
 import com.hanan.thmanyah.takehome.presentation.home.model.HomeSectionUi
@@ -13,9 +13,9 @@ fun SectionsPage.toUi(): HomeSectionsPageUi =
     HomeSectionsPageUi(
         sections = sections.mapNotNull { it.toUiOrNull() },
         paging = HomePagingUi(
-            currentPage = paging.currentPage,
-            nextPage = paging.nextPage,
-            totalPages = paging.totalPages
+            currentPage = paging?.currentPage,
+            nextPage = paging?.nextPage,
+            totalPages = paging?.totalPages
         )
     )
 

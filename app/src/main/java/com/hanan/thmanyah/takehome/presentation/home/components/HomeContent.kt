@@ -24,11 +24,20 @@ fun HomeContent(
     val listState = rememberLazyListState()
 
     LaunchedEffect(listState, canLoadMore) {
-        snapshotFlow { listState.canScrollForward }
+        snapshotFlow {
+            val layoutInfo = listState.layoutInfo
+            val lastVisible = layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
+            val total = layoutInfo.totalItemsCount
+            lastVisible to total
+        }
             .distinctUntilChanged()
-            .collect { canScrollForward ->
-                val reachedEnd = !canScrollForward
-                if (reachedEnd && canLoadMore) {
+            .collect { (lastVisible, total) ->
+                if (!canLoadMore) return@collect
+
+                val buffer = 3
+                val shouldLoadMore = total > 0 && lastVisible >= total - 1 - buffer
+
+                if (shouldLoadMore) {
                     onLoadMore()
                 }
             }

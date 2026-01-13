@@ -43,6 +43,6 @@ data class PodcastItem(
     override val title: String,
     override val imageUrl: String?,
     val description: String?,
-    val episodeCount: Int?,
-    val durationSec: Int?,
+    val episodeCount: Any?,
+    val durationSec: Any?,
 ) : HomeItem

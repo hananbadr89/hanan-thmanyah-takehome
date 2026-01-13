@@ -14,5 +14,5 @@ fun String.toContentType(): ContentType =
         "episode" -> ContentType.EPISODE
         "audio_book" -> ContentType.AUDIO_BOOK
         "audio_article" -> ContentType.AUDIO_ARTICLE
-        else -> ContentType.UNKNOWN
+        else -> ContentType.PODCAST
     }

@@ -19,7 +19,7 @@ import javax.inject.Singleton
 object NetworkModule {
 
     private const val HOME_BASE_URL = "https://api-v2-b2sit6oh3a-uc.a.run.app/"
-    private const val SEARCH_BASE_URL = "https://api-v2-b2sit6oh3a-uc.a.run.app/"
+    private const val SEARCH_BASE_URL = "https://mock.apidog.com/m1/735111-711675-default/"
 
     @Provides
     @Singleton

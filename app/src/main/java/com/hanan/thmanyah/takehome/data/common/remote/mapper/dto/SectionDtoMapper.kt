@@ -32,7 +32,7 @@ fun SectionDto.toDomain(
         title = name.orEmpty(),
         layout = layout,
         contentType = contentType,
-        order = order ?: Int.MAX_VALUE,
+        order = order.toSafeOrder(),
         items = items
     )
 }
@@ -43,7 +43,6 @@ fun SectionsResponseDto.toDomainPage(
     val sections = sections
         .orEmpty()
         .mapNotNull { it.toDomain(decoder) }
-        .sortedBy { it.order }
 
     val pagingState = PagingState(
         currentPage = 1,
@@ -54,7 +53,7 @@ fun SectionsResponseDto.toDomainPage(
 
     return SectionsPage(
         sections = sections,
-       paging = pagingState
+        paging = pagingState
     )
 }
 
@@ -75,3 +74,12 @@ fun SectionDto.sectionKey(): String {
 
 private fun SectionDto.stableSectionId(): String =
     "home_${order ?: -1}_${type.orEmpty()}_${contentType.orEmpty()}"
+
+private fun Any?.toSafeOrder(): Int {
+    return when (this) {
+        is Int -> this
+        is String -> this.toIntOrNull() ?: Int.MAX_VALUE
+        is Double -> this.toInt()
+        else -> Int.MAX_VALUE
+    }
+}

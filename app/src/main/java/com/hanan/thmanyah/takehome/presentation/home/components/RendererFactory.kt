@@ -1,7 +1,7 @@
 package com.hanan.thmanyah.takehome.presentation.home.components
 
 import androidx.compose.runtime.Composable
-import com.hanan.thmanyah.takehome.domain.home.model.section.SectionLayout
+import com.hanan.thmanyah.takehome.domain.common.model.model.section.SectionLayout
 import com.hanan.thmanyah.takehome.presentation.home.model.BigSquareCardUi
 import com.hanan.thmanyah.takehome.presentation.home.model.GridCardUi
 import com.hanan.thmanyah.takehome.presentation.home.model.HomeCardUi

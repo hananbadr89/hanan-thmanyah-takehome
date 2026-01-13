@@ -1,10 +1,10 @@
 package com.hanan.thmanyah.takehome.presentation.home.mapper
 
-import com.hanan.thmanyah.takehome.domain.home.model.item.AudioArticleItem
-import com.hanan.thmanyah.takehome.domain.home.model.item.AudioBookItem
-import com.hanan.thmanyah.takehome.domain.home.model.item.EpisodeItem
-import com.hanan.thmanyah.takehome.domain.home.model.item.HomeItem
-import com.hanan.thmanyah.takehome.domain.home.model.item.PodcastItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.AudioArticleItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.AudioBookItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.EpisodeItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.HomeItem
+import com.hanan.thmanyah.takehome.domain.common.model.model.item.PodcastItem
 import com.hanan.thmanyah.takehome.presentation.home.model.BigSquareCardUi
 import com.hanan.thmanyah.takehome.presentation.home.model.GridCardUi
 import com.hanan.thmanyah.takehome.presentation.home.model.QueueCardUi

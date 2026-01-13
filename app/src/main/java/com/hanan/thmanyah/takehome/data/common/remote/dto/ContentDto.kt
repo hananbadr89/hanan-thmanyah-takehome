@@ -31,7 +31,6 @@ data class AudioBookContentDto(
     val description: String? = null
 ) : ContentDto
 
-
 @JsonClass(generateAdapter = true)
 data class EpisodeContentDto(
     @property:Json(name = "episode_id") val episodeId: String? = null,
@@ -52,10 +51,10 @@ data class PodcastContentDto(
     val name: String? = null,
     val description: String? = null,
     @property:Json(name = "avatar_url") val avatarUrl: String? = null,
-    @property:Json(name = "episode_count") val episodeCount: Int? = null,
-    val duration: Int? = null,
+    @property:Json(name = "episode_count") val episodeCount: Any? = null,
+    val duration: Any? = null,
     val language: String? = null,
-    val priority: Int? = null,
-    val popularityScore: Int? = null,
-    val score: Double? = null
+    val priority: Any? = null,
+    val popularityScore: Any? = null,
+    val score: Any? = null
 ) : ContentDto

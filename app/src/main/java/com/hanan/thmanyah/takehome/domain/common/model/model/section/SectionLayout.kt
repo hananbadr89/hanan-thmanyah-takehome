@@ -17,5 +17,5 @@ fun String.toSectionLayout(): SectionLayout =
         "big_square",
         "big square" -> SectionLayout.BIG_SQUARE
 
-        else -> SectionLayout.UNKNOWN
+        else -> SectionLayout.SQUARE
     }
